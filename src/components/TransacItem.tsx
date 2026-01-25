@@ -1,7 +1,15 @@
-export const TransacItem = () => {
+interface TransacItemProps {
+    id: number;
+    name: string;
+    value: number;
+    date: string;
+    categoryUname: string
+}
+
+export const TransacItem = ({id, name, value, date, categoryUname} : TransacItemProps) => {
     return(
         <div>
-            This is a transaction item
+            {name}
         </div>
     )
 }

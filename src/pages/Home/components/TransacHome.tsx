@@ -1,11 +1,15 @@
 import TransacItem from "../../../components/TransacItem"
+import useExStore from "../../../store/expenses"
 
 export const TransacHome = () => {
+
+    const transactions = useExStore((state) => state.transactions)
+
     return(
         <div>
-            <TransacItem/>
-            <TransacItem/>
-            <TransacItem/>
+            {transactions.map((tx) => (
+                <TransacItem {...tx}/>
+            ))}
         </div>
     )
 }

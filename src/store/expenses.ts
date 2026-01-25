@@ -5,6 +5,37 @@ import type { Category } from "../types/category";
 
 const defaultCategories: Category[] = [{uniqueName: "catDEFAULT", name: "uncategorised"}]
 
+const MOCKtx: TransactionType[] = [
+    {
+        id: 1,
+        name: "Test 1",
+        value: 100,
+        date: "2026-01-05",
+        categoryUname: "catDEFAULT"
+    },
+    {
+        id: 2,
+        name: "Test 2",
+        value: 200,
+        date: "2026-01-05",
+        categoryUname: "catDEFAULT"
+    },
+    {
+        id: 3,
+        name: "Test 3",
+        value: 300,
+        date: "2026-01-05",
+        categoryUname: "catDEFAULT"
+    },
+    {
+        id: 4,
+        name: "Test 4",
+        value: 400,
+        date: "2026-01-05",
+        categoryUname: "catDEFAULT"
+    },
+]
+
 interface TransactionSlice {
     transactions: TransactionType[]
     addTransaction: (newTx: TransactionType) => void
@@ -20,7 +51,7 @@ interface CategorySlice {
 }
 
 const createTransactionSlice: StateCreator<TransactionSlice, []> = (set) => ({
-    transactions: [],
+    transactions: MOCKtx,
     addTransaction: (newTx) => set((state) => ({ transactions: [...state.transactions, newTx]})),
     deleteTransaction: (delId) => set((state) => ({ transactions: state.transactions.filter((tx: TransactionType) => tx.id !== delId)})),
     editTransaction: (upId, updates) => set((state) => ({ transactions: state.transactions.map((tx: TransactionType) => tx.id === upId ? {...tx, ...updates} : tx ) }))
