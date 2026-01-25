@@ -1,4 +1,4 @@
-import ProgBar from "../../../components/Progbar"
+import ProgBar from "../../../components/ProgBar"
 
 export const TopHome = () => {
     return (
