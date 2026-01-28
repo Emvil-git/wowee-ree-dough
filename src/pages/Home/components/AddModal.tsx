@@ -39,6 +39,8 @@ export const AddModal = () => {
         if (formRef.current) {
             formRef.current.reset()
         }
+
+        setHomeModalShow(false)
     }
 
     return(
