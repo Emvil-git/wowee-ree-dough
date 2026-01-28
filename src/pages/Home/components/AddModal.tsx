@@ -1,7 +1,20 @@
 import { useContext } from "react"
 import HomeContext from "../homecontext"
+import React, { useRef, type FormEvent } from 'react';
+import useExStore from "../../../store/expenses";
+import { getDateNOW, getIdFromDateNOWNOW } from "../../../utility_fx";
+import type { TransactionType } from "../../../types/transactionType";
 
 export const AddModal = () => {
+
+    const formRef = useRef<HTMLFormElement>(null)
+    const nameRef = useRef<HTMLInputElement>(null)
+    const valueRef = useRef<HTMLInputElement>(null)
+    const categoryRef = useRef<HTMLSelectElement>(null)
+
+    const categories = useExStore((state) => state.categories)
+    const addTx = useExStore((state) => state.addTransaction)
+
     const {homeModalShow, setHomeModalShow} = useContext(HomeContext)
 
     const handleCloseClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
@@ -11,11 +24,67 @@ export const AddModal = () => {
         }
     }
 
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        const newTx: TransactionType = {
+            id: getIdFromDateNOWNOW(),
+            name: nameRef.current?.value ? nameRef.current?.value : "",
+            value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
+            date: getDateNOW(),
+            categoryUname: "catDEFAULT",
+        };
+
+        addTx(newTx)
+
+        if (formRef.current) {
+            formRef.current.reset()
+        }
+    }
+
     return(
-        <div className="absolute bg-gray-950 w-screen h-screen grid place-items-center">
-            <form action="" className="bg-white">
+        <div className="absolute bg-gray-950 w-100 h-100 grid place-items-center">
+            <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-[1em] max-w-120 bg-white"
+            >
                 <button onClick={handleCloseClick}>CLOSE</button>
-                modal now open
+
+                <div>
+                    <label htmlFor="name">Name:</label>
+                    <input 
+                        id="name"
+                        type="text" 
+                        ref={nameRef} 
+                        placeholder="Impulse buy" 
+                        required 
+                    />
+                </div>
+            
+                <div>
+                    <label htmlFor="value">Amount ($):</label>
+                    <input 
+                        id="value"
+                        type="number" 
+                        ref={valueRef} 
+                        step="0.01" 
+                        min="0"
+                        placeholder="0.00" 
+                        required 
+                    />
+                </div>
+            
+                <div>
+                    <label htmlFor="category">Category:</label>
+                    <select id="category" ref={categoryRef} required>
+                        <option value="" disabled>Select a category</option>
+                        {categories.map((cat) => (
+                            <option value={cat.uniqueName}>{cat.name}</option>
+                        ))}
+                    </select>
+                </div>
+            
+              <button type="submit">Submit</button>
             </form>
         </div>
     )

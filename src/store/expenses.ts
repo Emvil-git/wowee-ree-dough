@@ -7,28 +7,28 @@ const defaultCategories: Category[] = [{uniqueName: "catDEFAULT", name: "uncateg
 
 const MOCKtx: TransactionType[] = [
     {
-        id: 1,
+        id: BigInt(1),
         name: "Test 1",
         value: 100,
         date: "2026-01-05",
         categoryUname: "catDEFAULT"
     },
     {
-        id: 2,
+        id: BigInt(2),
         name: "Test 2",
         value: 200,
         date: "2026-01-05",
         categoryUname: "catDEFAULT"
     },
     {
-        id: 3,
+        id: BigInt(3),
         name: "Test 3",
         value: 300,
         date: "2026-01-05",
         categoryUname: "catDEFAULT"
     },
     {
-        id: 4,
+        id: BigInt(4),
         name: "Test 4",
         value: 400,
         date: "2026-01-05",
@@ -39,8 +39,8 @@ const MOCKtx: TransactionType[] = [
 interface TransactionSlice {
     transactions: TransactionType[]
     addTransaction: (newTx: TransactionType) => void
-    deleteTransaction: (delId: number) => void
-    editTransaction: (id : number, updatesTx: Partial<TransactionType>) => void
+    deleteTransaction: (delId: bigint) => void
+    editTransaction: (id : bigint, updatesTx: Partial<TransactionType>) => void
 }
 
 interface CategorySlice {

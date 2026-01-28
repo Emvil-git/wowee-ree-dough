@@ -1,0 +1,7 @@
+export const getDateNOW = (): string => {
+    return new Date().toISOString().split('T')[0]
+}
+
+export const getIdFromDateNOWNOW = (): bigint => {
+  return BigInt(new Date().toISOString().replace(/\D/g, ''))
+}
