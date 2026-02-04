@@ -6,43 +6,43 @@ import type { Category } from "../types/category";
 
 const defaultCategories: Category[] = [{uniqueName: "catDEFAULT", name: "uncategorised"}]
 
-const MOCKtx: TransactionType[] = [
-    {
-        id: BigInt(1),
-        name: "Test 1",
-        value: 100,
-        date: "2026-01-05",
-        categoryUname: "catDEFAULT"
-    },
-    {
-        id: BigInt(2),
-        name: "Test 2",
-        value: 200,
-        date: "2026-01-05",
-        categoryUname: "catDEFAULT"
-    },
-    {
-        id: BigInt(3),
-        name: "Test 3",
-        value: 300,
-        date: "2026-01-05",
-        categoryUname: "catDEFAULT"
-    },
-    {
-        id: BigInt(4),
-        name: "Test 4",
-        value: 400,
-        date: "2026-01-05",
-        categoryUname: "catDEFAULT"
-    },
-]
+// const MOCKtx: TransactionType[] = [
+//     {
+//         id: BigInt(1),
+//         name: "Test 1",
+//         value: 100,
+//         date: "2026-01-05",
+//         categoryUname: "catDEFAULT"
+//     },
+//     {
+//         id: BigInt(2),
+//         name: "Test 2",
+//         value: 200,
+//         date: "2026-01-05",
+//         categoryUname: "catDEFAULT"
+//     },
+//     {
+//         id: BigInt(3),
+//         name: "Test 3",
+//         value: 300,
+//         date: "2026-01-05",
+//         categoryUname: "catDEFAULT"
+//     },
+//     {
+//         id: BigInt(4),
+//         name: "Test 4",
+//         value: 400,
+//         date: "2026-01-05",
+//         categoryUname: "catDEFAULT"
+//     },
+// ]
 
 interface TransactionSlice {
     transactions: TransactionType[],
     setTransactions: (newTxs: TransactionType[]) => void 
     addTransaction: (newTx: TransactionType) => void
-    deleteTransaction: (delId: bigint) => void
-    editTransaction: (id : bigint, updatesTx: Partial<TransactionType>) => void
+    deleteTransaction: (delId: string) => void
+    editTransaction: (id : string, updatesTx: Partial<TransactionType>) => void
 }
 
 interface CategorySlice {

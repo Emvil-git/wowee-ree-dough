@@ -2,7 +2,7 @@ import { useContext } from "react"
 import HomeContext from "../homecontext"
 import React, { useRef, type FormEvent } from 'react';
 import useExStore from "../../../store/expenses";
-import { getDateNOW, getIdFromDateNOWNOW } from "../../../utility_fx";
+import { getDateNOW } from "../../../utility_fx";
 import type { TransactionType } from "../../../types/transactionType";
 
 export const AddModal = () => {
@@ -27,19 +27,24 @@ export const AddModal = () => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         const newTx: TransactionType = {
-            id: getIdFromDateNOWNOW(),
+            id: crypto.randomUUID(),
             name: nameRef.current?.value ? nameRef.current?.value : "",
             value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
             date: getDateNOW(),
             categoryUname: "catDEFAULT",
         };
 
+        console.log("ADDING NEW TX")
+
         addTx(newTx)
+
+        console.log("resetting add modal form")
 
         if (formRef.current) {
             formRef.current.reset()
         }
 
+        console.log("closing add modal")
         setHomeModalShow(false)
     }
 

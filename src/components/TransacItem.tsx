@@ -1,5 +1,5 @@
 interface TransacItemProps {
-    id: bigint;
+    id: string;
     name: string;
     value: number;
     date: string;
@@ -8,7 +8,7 @@ interface TransacItemProps {
 
 export const TransacItem = ({id, name, value, date, categoryUname} : TransacItemProps) => {
     return(
-        <div>
+        <div key={id}>
             {name}
             {value}
             {date}
