@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import Navigation from './components/Navigation'
 import AppRoutes from './routes'
 import './App.css'
+import useExStore from './store/expenses'
+import useAppStateStore from './store/appStates'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const setIsHydrated = useAppStateStore((state) => state.setIsHydrated)
+
+  useEffect(() => {
+    useExStore.persist.rehydrate()
+    setIsHydrated(true)
+  },[])
 
   return (
     <>

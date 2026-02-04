@@ -63,7 +63,7 @@ interface CategorySlice {
 
 
 const createTransactionSlice: StateCreator<TransactionSlice & CategorySlice,[["zustand/persist", unknown]], [], TransactionSlice> = (set) => ({
-    transactions: MOCKtx,
+    transactions: [],
     setTransactions: (newTxs) => set({ transactions: newTxs }),
     addTransaction: (newTx) => set((state) => ({ transactions: [...state.transactions, newTx]})),
     deleteTransaction: (delId) => set((state) => ({ transactions: state.transactions.filter((tx: TransactionType) => tx.id !== delId)})),

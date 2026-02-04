@@ -1,5 +1,5 @@
 export interface TransactionType {
-    id: number;
+    id: bigint;
     name: string;
     value: number;
     date: string;
