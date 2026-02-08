@@ -13,7 +13,7 @@ export const TransacHome = () => {
     return(
         <div>
             {sortedTx.map((tx) => (
-                <TransacItem {...tx}/>
+                <TransacItem key={tx.id} {...tx} canUD={true}/>
             ))}
         </div>
     )

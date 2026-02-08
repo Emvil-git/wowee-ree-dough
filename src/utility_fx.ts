@@ -5,3 +5,7 @@ export const getDateNOW = (): string => {
 export const getIdFromDateNOWNOW = (): bigint => {
   return BigInt(new Date().toISOString().replace(/\D/g, ''))
 }
+
+export const getFullDateTime = (): string => {
+  return new Date().toISOString()
+}
