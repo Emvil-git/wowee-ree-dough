@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { StateCreator } from "zustand";
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TransactionType } from "../types/transactionType";
 import type { Category } from "../types/category";
 
@@ -101,6 +101,7 @@ const useExStore = create<TransactionSlice & CategorySlice>()(
         }),
         {
             name: 'expense-storage',
+            storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 transactions: state.transactions,
                 categories: state.categories
