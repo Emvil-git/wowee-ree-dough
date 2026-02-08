@@ -2,7 +2,7 @@ import { useContext } from "react"
 import HomeContext from "../homecontext"
 import React, { useRef, type FormEvent } from 'react';
 import useExStore from "../../../store/expenses";
-import { getDateNOW } from "../../../utility_fx";
+import { getFullDateTime } from "../../../utility_fx";
 import type { TransactionType } from "../../../types/transactionType";
 
 export const AddModal = () => {
@@ -30,7 +30,7 @@ export const AddModal = () => {
             id: crypto.randomUUID(),
             name: nameRef.current?.value ? nameRef.current?.value : "",
             value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
-            date: getDateNOW(),
+            date: getFullDateTime(),
             categoryUname: "catDEFAULT",
         };
 
