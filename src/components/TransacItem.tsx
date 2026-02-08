@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import useExStore from "../store/expenses";
+import { isoZToLocal } from "../utility_fx";
 
 interface TransacItemProps {
     id: string;
@@ -52,7 +53,7 @@ export const TransacItem = ({id, name, value, date, categoryUname, canUD} : Tran
                     <input className="p-1 border"  ref={valueRef} type="number" defaultValue={value} /> :
                     <span>{value}</span>
                 }
-                <span>{date}</span>
+                <span>{isoZToLocal(date)}</span>
                 <span>{categoryUname}</span>
             </form>
 
