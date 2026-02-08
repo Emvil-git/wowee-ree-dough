@@ -39,6 +39,7 @@ const defaultCategories: Category[] = [{uniqueName: "catDEFAULT", name: "uncateg
 
 interface TransactionSlice {
     transactions: TransactionType[],
+    clearTransactions: () => void
     setTransactions: (newTxs: TransactionType[]) => void 
     addTransaction: (newTx: TransactionType) => void
     deleteTransaction: (delId: string) => void
@@ -47,6 +48,7 @@ interface TransactionSlice {
 
 interface CategorySlice {
     categories: Category[],
+    clearCategories: () => void
     setCategories: (newCats: Category[]) => void,
     addCategory: (newCat: Category) => void
     deleteCategory: (delUName: string) => void
@@ -65,6 +67,7 @@ interface CategorySlice {
 const createTransactionSlice: StateCreator<TransactionSlice & CategorySlice,[["zustand/persist", unknown]], [], TransactionSlice> = (set) => ({
     transactions: [],
     setTransactions: (newTxs) => set({ transactions: newTxs }),
+    clearTransactions: () => set({transactions: []}),
     addTransaction: (newTx) => set((state) => ({ transactions: [...state.transactions, newTx]})),
     deleteTransaction: (delId) => set((state) => ({ transactions: state.transactions.filter((tx: TransactionType) => tx.id !== delId)})),
     editTransaction: (upId, updates) => set((state) => ({ transactions: state.transactions.map((tx: TransactionType) => tx.id === upId ? {...tx, ...updates} : tx ) }))
@@ -81,6 +84,7 @@ const createTransactionSlice: StateCreator<TransactionSlice & CategorySlice,[["z
 const createCategorySlice: StateCreator <TransactionSlice & CategorySlice,[["zustand/persist", unknown]], [], CategorySlice> = (set) => ({
     categories: defaultCategories,
     setCategories: (newCats) => set({ categories: newCats }),
+    clearCategories: () => set({categories: defaultCategories}),
     addCategory: (newCat) => set((state) => ({ categories: [...state.categories, newCat] })),
     deleteCategory: (delUName) => set((state) => ({ categories: state.categories.filter((cat: Category) => cat.uniqueName !== delUName) })),
     editCategory: (uniqueName, upCat) => set((state) => ({categories: state.categories.map( (cat: Category) => cat.uniqueName === uniqueName ? {...cat, ...upCat} : cat ) }) )
