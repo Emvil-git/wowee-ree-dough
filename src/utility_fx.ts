@@ -12,8 +12,8 @@ export const getFullDateTime = (): string => {
   return new Date().toISOString()
 }
 
-export const isoZToLocal = (isoString: string) => {
+export const isoZToLocal = (isoString: string):string => {
   const zDT = DateTime.fromISO(isoString)
 
-  return zDT.toLocal().toISO()
+  return zDT.toLocal().toISO() || '' // there's probably a better way to do this
 }
