@@ -17,13 +17,13 @@ const Transactions = () => {
             return isFiltered ? transactions.filter((tx) => {
                 isoGetMonth(tx.date) === filterMonth && isoGetYear(tx.date) === filterYear
             }) : [...transactions]
-        },[transactions]
+        },[transactions, filterMonth, filterYear, isFiltered]
     )
 
     const sortedTx = useMemo(
         () => {
             return [...filteredTx].sort((a,b) => b.date.localeCompare(a.date))
-        },[transactions]
+        },[transactions, filteredTx]
     )
 
     return(
