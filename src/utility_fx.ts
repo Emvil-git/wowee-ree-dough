@@ -17,3 +17,28 @@ export const isoZToLocal = (isoString: string):string => {
 
   return zDT.toLocal().toISO() || '' // there's probably a better way to do this
 }
+
+export const isoGetMonth = (isoString: string) => {
+  const dateObj = new Date(isoString)
+
+  return dateObj.toLocaleString('en-gb', {month: "long"})
+}
+
+export const isoGetYear = (isoString: string)  => {
+  const dateObj = new Date(isoString)
+
+  return dateObj.toLocaleString('en-gb', {year: "numeric"})
+}
+
+export const getCurrMonth = () => {
+  const currDate = new Date()
+
+  return currDate.toLocaleString('en-gb', {month: "long"})
+}
+
+
+export const getCurrYear = () => {
+  const currDate = new Date()
+
+  return currDate.toLocaleString('en-gb', {year: "numeric"})
+}
