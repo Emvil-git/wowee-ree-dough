@@ -1,21 +1,21 @@
-import { useContext } from "react"
+import React, { useContext } from "react"
 import HomeContext from "../homecontext"
-import React, { useRef, type FormEvent } from 'react';
-import useExStore from "../../../store/expenses";
-import { getFullDateTime } from "../../../utility_fx";
-import type { TransactionType } from "../../../types/transactionType";
+import { AddTxModal } from "./AddTxModal"
+// import useExStore from "../../../store/expenses";
+// import { getFullDateTime } from "../../../utility_fx";
+// import type { TransactionType } from "../../../types/transactionType";
 
 export const AddModal = () => {
 
-    const formRef = useRef<HTMLFormElement>(null)
-    const nameRef = useRef<HTMLInputElement>(null)
-    const valueRef = useRef<HTMLInputElement>(null)
-    const categoryRef = useRef<HTMLSelectElement>(null)
+    // const formRef = useRef<HTMLFormElement>(null)
+    // const nameRef = useRef<HTMLInputElement>(null)
+    // const valueRef = useRef<HTMLInputElement>(null)
+    // const categoryRef = useRef<HTMLSelectElement>(null)
 
-    const categories = useExStore((state) => state.categories)
-    const addTx = useExStore((state) => state.addTransaction)
+    // const categories = useExStore((state) => state.categories)
+    // const addTx = useExStore((state) => state.addTransaction)
 
-    const {homeModalShow, setHomeModalShow} = useContext(HomeContext)
+    const {homeModalShow, setHomeModalShow, modalMode} = useContext(HomeContext)
 
     const handleCloseClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
@@ -24,38 +24,42 @@ export const AddModal = () => {
         }
     }
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        const newTx: TransactionType = {
-            id: crypto.randomUUID(),
-            name: nameRef.current?.value ? nameRef.current?.value : "",
-            value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
-            date: getFullDateTime(),
-            categoryUname: "catDEFAULT",
-        };
+    // const handleSubmit = (e: FormEvent) => {
+    //     e.preventDefault();
+    //     const newTx: TransactionType = {
+    //         id: crypto.randomUUID(),
+    //         name: nameRef.current?.value ? nameRef.current?.value : "",
+    //         value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
+    //         date: getFullDateTime(),
+    //         categoryUname: "catDEFAULT",
+    //     };
 
-        console.log("ADDING NEW TX")
+    //     console.log("ADDING NEW TX")
 
-        addTx(newTx)
+    //     addTx(newTx)
 
-        console.log("resetting add modal form")
+    //     console.log("resetting add modal form")
 
-        if (formRef.current) {
-            formRef.current.reset()
-        }
+    //     if (formRef.current) {
+    //         formRef.current.reset()
+    //     }
 
-        console.log("closing add modal")
-        setHomeModalShow(false)
-    }
+    //     console.log("closing add modal")
+    //     setHomeModalShow(false)
+    // }
 
     return(
         <div className="absolute bg-gray-950 w-100 h-100 grid place-items-center">
-            <form
+            <button className="bg-white" onClick={handleCloseClick}>CLOSE</button>
+            {
+                modalMode === "transaction" ? <AddTxModal/> : ''
+            }
+            {/* <form
                 ref={formRef}
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-[1em] max-w-120 bg-white"
             >
-                <button onClick={handleCloseClick}>CLOSE</button>
+                
 
                 <div>
                     <label htmlFor="name">Name:</label>
@@ -92,7 +96,7 @@ export const AddModal = () => {
                 </div>
             
               <button type="submit">Submit</button>
-            </form>
+            </form> */}
         </div>
     )
 }

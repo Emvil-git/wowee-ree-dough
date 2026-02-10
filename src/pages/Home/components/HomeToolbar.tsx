@@ -14,7 +14,7 @@ export const HomeToolbar = () => {
 
     return(
         <div className="absolute bottom-0 w-screen bg-gray-200">
-            <button onClick={handleAddClick}>ADD</button>
+            <button onClick={handleAddClick}>ADD TX</button>
         </div>
     )
 }
