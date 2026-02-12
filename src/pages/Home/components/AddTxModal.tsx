@@ -22,7 +22,7 @@ export const AddTxModal = () => {
                 name: nameRef.current?.value ? nameRef.current?.value : "",
                 value: valueRef.current ? parseFloat(valueRef.current.value) : 0,
                 date: getFullDateTime(),
-                categoryUname: "catDEFAULT",
+                categoryUname: categoryRef.current?.value ? categoryRef.current.value : "catDEFAULT",
             };
     
             console.log("ADDING NEW TX")

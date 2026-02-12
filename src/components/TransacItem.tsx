@@ -15,6 +15,8 @@ interface TransacItemProps {
 
 export const TransacItem = ({id, name, value, date, category, canUD} : TransacItemProps) => {
 
+    const categories = useExStore((state) => state.categories)
+    
     const [isEditing, setIsEditing] = useState<boolean>(false)
 
     const editTransaction = useExStore((state) => state.editTransaction)
@@ -22,10 +24,11 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
 
     const nameRef = useRef<HTMLInputElement>(null)
     const valueRef = useRef<HTMLInputElement>(null)
+    const categoryRef = useRef<HTMLSelectElement>(null)
 
     const handleEdit = (eId: string) => {
         if (isEditing) {
-            editTransaction(eId, {name: nameRef.current?.value, value: Number(valueRef.current?.value)})
+            editTransaction(eId, {name: nameRef.current?.value, value: Number(valueRef.current?.value), categoryUname: categoryRef.current?.value})
 
             setIsEditing(false)
         } else  {
@@ -57,7 +60,20 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                 }
                 <DateDisplay date={isoZToLocal(date)}/>
 
-                <span>{category ? category.name : 'BOMBACLAAT'}</span>
+                {/* <span>{category ? category.name : 'BOMBACLAAT'}</span> */}
+
+                { isEditing ? 
+                    <div>
+                        <label htmlFor="category">Category:</label>
+                        <select id="category" ref={categoryRef} required>
+                            <option value="" disabled>Select a category</option>
+                            {categories.map((cat) => (
+                                <option value={cat.uniqueName}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div> :
+                    <span>{category ? category.name : 'BOMBACLAAT'}</span>
+                }
             </form>
 
             {canUD ? 

@@ -24,7 +24,7 @@ export const TransacHome = () => {
             {
                 categorisedTx.length ?
                 categorisedTx.map((tx) => (
-                <TransacItem key={tx.id} {...tx} canUD={true}/>
+                <TransacItem key={tx.id} {...tx} canUD={true} />
                 )) :
                 <span className="text-center text-sm text-gray-500"> No transactions and shit </span>
             }
