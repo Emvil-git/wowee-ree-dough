@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
 import useExStore from "../../store/expenses"
 import TransacItem from "../../components/TransacItem"
-import { TxPageContext } from "../../contexts/cTransactionPage"
+import { TxPageContext } from "./transactioncontext"
 import { getCurrMonth, getCurrYear, isoGetMonth, isoGetYear } from "../../utility_fx"
 
 const Transactions = () => {

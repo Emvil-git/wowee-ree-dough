@@ -6,6 +6,7 @@ export const TransacHome = () => {
 
     const transactions = useExStore((state) => state.transactions)
     const clearTx = useExStore((state) => state.clearTransactions)
+    const categories = useExStore((state) => state.categories)
 
     const sortedTx = useMemo(() => {
         return[...transactions].sort((a, b) => b.date.localeCompare(a.date))
