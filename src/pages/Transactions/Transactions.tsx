@@ -3,10 +3,13 @@ import useExStore from "../../store/expenses"
 import TransacItem from "../../components/TransacItem"
 import { TxPageContext } from "./transactioncontext"
 import { getCurrMonth, getCurrYear, isoGetMonth, isoGetYear } from "../../utility_fx"
+import { useCategorisedTx } from "../../hooks/useCategorisedTx"
 
 const Transactions = () => {
 
     const transactions = useExStore((state) => state.transactions)
+    const categories = useExStore((state) => state.categories)
+
 
     const [filterMonth, setFilterMonth] = useState(getCurrMonth())
     const [filterYear, setFilterYear] = useState(getCurrYear())
@@ -26,6 +29,8 @@ const Transactions = () => {
         },[transactions, filteredTx]
     )
 
+    const catFiltTx = useCategorisedTx(sortedTx, categories)
+
     return(
         <TxPageContext value={{isFiltered, setIsFiltered, filterMonth, setFilterMonth, filterYear, setFilterYear}}>
             <div>
@@ -34,7 +39,7 @@ const Transactions = () => {
                     <span>sort/ group by</span>
                 </div>
                 <div>
-                    {sortedTx.map((tx) => 
+                    {catFiltTx.map((tx) => 
                         <TransacItem key={tx.id} {...tx} canUD={false}/>
                     )}
                 </div>

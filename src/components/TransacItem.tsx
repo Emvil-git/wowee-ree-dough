@@ -2,17 +2,18 @@ import { useRef, useState } from "react";
 import useExStore from "../store/expenses";
 import { isoZToLocal } from "../utility_fx";
 import DateDisplay from "./DateDisplay";
+import type { CategoryType } from "../types/categoryType";
 
 interface TransacItemProps {
     id: string;
     name: string;
     value: number;
     date: string;
-    categoryUname: string,
+    category?: CategoryType,
     canUD?: boolean
 }
 
-export const TransacItem = ({id, name, value, date, categoryUname, canUD} : TransacItemProps) => {
+export const TransacItem = ({id, name, value, date, category, canUD} : TransacItemProps) => {
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
 
@@ -44,7 +45,7 @@ export const TransacItem = ({id, name, value, date, categoryUname, canUD} : Tran
             {categoryUname} */}
 
             <form
-            action=""
+            className="flex flex-col gap-1"
             >
                 {isEditing ?
                     <input className="p-1 border" ref={nameRef} type="text" defaultValue={name} /> :
@@ -55,7 +56,8 @@ export const TransacItem = ({id, name, value, date, categoryUname, canUD} : Tran
                     <span>{value}</span>
                 }
                 <DateDisplay date={isoZToLocal(date)}/>
-                <span>{categoryUname}</span>
+
+                <span>{category ? category.name : 'BOMBACLAAT'}</span>
             </form>
 
             {canUD ? 
