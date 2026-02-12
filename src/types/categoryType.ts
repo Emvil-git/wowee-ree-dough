@@ -1,4 +1,4 @@
-export interface Category {
+export interface CategoryType {
     name: string;
     uniqueName: string; // this will serve as the id
 }

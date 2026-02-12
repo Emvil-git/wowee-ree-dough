@@ -2,9 +2,9 @@ import { create } from "zustand";
 import type { StateCreator } from "zustand";
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TransactionType } from "../types/transactionType";
-import type { Category } from "../types/category";
+import type { CategoryType } from "../types/categoryType";
 
-const defaultCategories: Category[] = [{uniqueName: "catDEFAULT", name: "uncategorised"}]
+const defaultCategories: CategoryType[] = [{uniqueName: "catDEFAULT", name: "uncategorised"}]
 
 // const MOCKtx: TransactionType[] = [
 //     {
@@ -47,12 +47,12 @@ interface TransactionSlice {
 }
 
 interface CategorySlice {
-    categories: Category[],
+    categories: CategoryType[],
     clearCategories: () => void
-    setCategories: (newCats: Category[]) => void,
-    addCategory: (newCat: Category) => void
+    setCategories: (newCats: CategoryType[]) => void,
+    addCategory: (newCat: CategoryType) => void
     deleteCategory: (delUName: string) => void
-    editCategory: (uniqueName: string, updatesCat: Partial<Category>) => void //ts will change once you add a colour and icon to the category type
+    editCategory: (uniqueName: string, updatesCat: Partial<CategoryType>) => void //ts will change once you add a colour and icon to the category type
 }
 
 // const createTransactionSlice: StateCreator<TransactionSlice,[["zustand/persist", unknown]], []> = (set) => ({
@@ -86,8 +86,8 @@ const createCategorySlice: StateCreator <TransactionSlice & CategorySlice,[["zus
     setCategories: (newCats) => set({ categories: newCats }),
     clearCategories: () => set({categories: defaultCategories}),
     addCategory: (newCat) => set((state) => ({ categories: [...state.categories, newCat] })),
-    deleteCategory: (delUName) => set((state) => ({ categories: state.categories.filter((cat: Category) => cat.uniqueName !== delUName) })),
-    editCategory: (uniqueName, upCat) => set((state) => ({categories: state.categories.map( (cat: Category) => cat.uniqueName === uniqueName ? {...cat, ...upCat} : cat ) }) )
+    deleteCategory: (delUName) => set((state) => ({ categories: state.categories.filter((cat: CategoryType) => cat.uniqueName !== delUName) })),
+    editCategory: (uniqueName, upCat) => set((state) => ({categories: state.categories.map( (cat: CategoryType) => cat.uniqueName === uniqueName ? {...cat, ...upCat} : cat ) }) )
 })
 
 // const useExStore = create<TransactionSlice & CategorySlice>()(

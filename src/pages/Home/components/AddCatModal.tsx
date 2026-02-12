@@ -1,7 +1,7 @@
 import React, { useRef, useContext, type FormEvent } from "react"
 import useExStore from "../../../store/expenses"
 import HomeContext from "../homecontext"
-import { type Category } from "../../../types/category"
+import { type CategoryType } from "../../../types/categoryType"
 
 export const AddCatModal = () => {
     const formRef = useRef<HTMLFormElement>(null)
@@ -13,7 +13,7 @@ export const AddCatModal = () => {
 
     const handleSubmit = (e: FormEvent) => {
             e.preventDefault();
-            const newCat: Category = {
+            const newCat: CategoryType = {
                 uniqueName: crypto.randomUUID(),
                 name: nameRef.current?.value ? nameRef.current?.value : ""
             };
