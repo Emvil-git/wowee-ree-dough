@@ -3,8 +3,9 @@ import type { StateCreator } from "zustand";
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TransactionType } from "../types/transactionType";
 import type { CategoryType } from "../types/categoryType";
+import { colourObjs } from "../utility";
 
-const defaultCategories: CategoryType[] = [{uniqueName: "catDEFAULT", name: "uncategorised"}]
+const defaultCategories: CategoryType[] = [{uniqueName: "catDEFAULT", name: "uncategorised", colour: colourObjs[0]}]
 
 // const MOCKtx: TransactionType[] = [
 //     {

@@ -3,6 +3,7 @@ import useExStore from "../store/expenses";
 import { isoZToLocal } from "../utility_fx";
 import DateDisplay from "./DateDisplay";
 import type { CategoryType } from "../types/categoryType";
+import { CatDisplay } from "./CatDisplay";
 
 interface TransacItemProps {
     id: string;
@@ -72,7 +73,7 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                             ))}
                         </select>
                     </div> :
-                    <span>{category ? category.name : 'BOMBACLAAT'}</span>
+                    <>{category ? <CatDisplay {...category}/> : 'BOMBACLAAT'}</>
                 }
             </form>
 
