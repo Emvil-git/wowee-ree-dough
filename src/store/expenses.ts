@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TransactionType } from "../types/transactionType";
 import type { CategoryType } from "../types/categoryType";
 import { colourObjs } from "../utility";
+import type { BudgetType } from "../types/budgetType";
 
 const defaultCategories: CategoryType[] = [{uniqueName: "catDEFAULT", name: "uncategorised", colour: colourObjs[0]}]
 
@@ -38,6 +39,8 @@ const defaultCategories: CategoryType[] = [{uniqueName: "catDEFAULT", name: "unc
 //     },
 // ]
 
+
+
 interface TransactionSlice {
     transactions: TransactionType[],
     clearTransactions: () => void
@@ -56,6 +59,14 @@ interface CategorySlice {
     editCategory: (uniqueName: string, updatesCat: Partial<CategoryType>) => void //ts will change once you add a colour and icon to the category type
 }
 
+interface BudgetSlice {
+    budgets: BudgetType
+    clearBudgets: () => void
+    updateBudget: (bUpdates: Partial<BudgetType>) => void
+}
+
+export type ExStoreType = TransactionSlice & CategorySlice & BudgetSlice
+
 // const createTransactionSlice: StateCreator<TransactionSlice,[["zustand/persist", unknown]], []> = (set) => ({
 //     transactions: MOCKtx,
 //     setTransactions: (newTxs) => set({ transactions: newTxs }),
@@ -65,7 +76,7 @@ interface CategorySlice {
 // })
 
 
-const createTransactionSlice: StateCreator<TransactionSlice & CategorySlice,[["zustand/persist", unknown]], [], TransactionSlice> = (set) => ({
+const createTransactionSlice: StateCreator<ExStoreType,[["zustand/persist", unknown]], [], TransactionSlice> = (set) => ({
     transactions: [],
     setTransactions: (newTxs) => set({ transactions: newTxs }),
     clearTransactions: () => set({transactions: []}),
@@ -82,7 +93,7 @@ const createTransactionSlice: StateCreator<TransactionSlice & CategorySlice,[["z
 //     editCategory: (uniqueName, upCat) => set((state) => ({categories: state.categories.map( (cat: Category) => cat.uniqueName === uniqueName ? {...cat, ...upCat} : cat ) }) )
 // })
 
-const createCategorySlice: StateCreator <TransactionSlice & CategorySlice,[["zustand/persist", unknown]], [], CategorySlice> = (set) => ({
+const createCategorySlice: StateCreator <ExStoreType,[["zustand/persist", unknown]], [], CategorySlice> = (set) => ({
     categories: defaultCategories,
     setCategories: (newCats) => set({ categories: newCats }),
     clearCategories: () => set({categories: defaultCategories}),
@@ -98,18 +109,27 @@ const createCategorySlice: StateCreator <TransactionSlice & CategorySlice,[["zus
 //     })
 // )
 
-const useExStore = create<TransactionSlice & CategorySlice>()(
+const createBudgetSlice: StateCreator<ExStoreType, [["zustand/persist", unknown]], [], BudgetSlice> = (set) => 
+    ({
+        budgets: {monthly: null, weekly: null, daily: null},
+        clearBudgets: () => set({budgets: {monthly: null, weekly: null, daily: null}}),
+        updateBudget: (update: Partial<BudgetType>) => set((state) => ({budgets: {...state.budgets, ...update}}))
+    })
+
+const useExStore = create<ExStoreType>()(
     persist(
         (...args) => ({
             ...createTransactionSlice(...args),
-            ...createCategorySlice(...args)
+            ...createCategorySlice(...args),
+            ...createBudgetSlice(...args)
         }),
         {
             name: 'expense-storage',
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 transactions: state.transactions,
-                categories: state.categories
+                categories: state.categories,
+                budget: state.budgets
             })
         }
     )
