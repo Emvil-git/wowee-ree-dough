@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import HomeContext from "../homecontext"
 import { AddTxModal } from "./AddTxModal"
 import { AddCatModal } from "./AddCatModal"
+import { BudgetsModalForm } from "../../../components/BudgetsModalForm"
 // import useExStore from "../../../store/expenses";
 // import { getFullDateTime } from "../../../utility_fx";
 // import type { TransactionType } from "../../../types/transactionType";
@@ -53,7 +54,18 @@ export const AddModal = () => {
         <div className="absolute bg-gray-950 w-100 h-100 grid place-items-center">
             <button className="bg-white" onClick={handleCloseClick}>CLOSE</button>
             {
-                modalMode === "transaction" ? <AddTxModal/> : <AddCatModal/>
+                (() =>{
+                    switch (true){
+                        case modalMode === "transaction":
+                            return <AddTxModal/>
+                        case modalMode === "category":
+                            return <AddCatModal/>
+                        case modalMode === "budget":
+                            return <BudgetsModalForm/>
+                        default:
+                            return ''
+                    }
+                })() // iffy time
             }
             {/* <form
                 ref={formRef}

@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import React, { useContext } from "react"
 import HomeContext from "../homecontext"
 
 export const HomeToolbar = () => {
@@ -21,10 +21,19 @@ export const HomeToolbar = () => {
         }
     }
 
+    const handleSetBudgetClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault()
+        setModalMode("budget")
+        if (!homeModalShow) {
+            setHomeModalShow(true)
+        }
+    } 
+
     return(
         <div className="absolute bottom-0 w-screen bg-gray-200 flex gap-2">
             <button onClick={handleAddTxClick}>ADD TX</button>
             <button onClick={handleAddCatClick}>ADD CAT</button>
+            <button onClick={handleSetBudgetClick}>SET BUDGETS</button>
         </div>
     )
 }

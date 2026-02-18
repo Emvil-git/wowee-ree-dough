@@ -1,1 +1,1 @@
-export type ModalModeType = "transaction" | "category"
+export type ModalModeType = "transaction" | "category" | "budget"
