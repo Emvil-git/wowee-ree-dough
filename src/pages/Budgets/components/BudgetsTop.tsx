@@ -1,9 +1,17 @@
+import useExStore from "../../../store/expenses"
+
 export const BudgetsTop = () => {
+    
+    const budgets = useExStore((state) => state.budgets)
+    
     return(
         <div>
-            Monthly - X
-            <p>Weekly - X</p>
-            <p>Daily - X</p>
+            <div className="flex flex-col">
+                <span>Monthly {budgets.monthly === null ? "Not Assigned" : budgets.monthly}</span>
+                <span>Weekly {budgets.weekly === null ? "Not Assigned" : budgets.weekly}</span>
+                <span>Daily {budgets.daily === null ? "Not Assigned" : budgets.daily}</span>
+            </div>
+    
             {/* TODO WEEKDAY/WEEKEND SPLIT */}
             Categories:
         </div>
