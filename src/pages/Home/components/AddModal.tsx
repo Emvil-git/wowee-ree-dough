@@ -61,7 +61,7 @@ export const AddModal = () => {
                         case modalMode === "category":
                             return <AddCatModal/>
                         case modalMode === "budget":
-                            return <BudgetsModalForm/>
+                            return <BudgetsModalForm page="home"/>
                         default:
                             return ''
                     }

@@ -1,5 +1,11 @@
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import useExStore from "../store/expenses"
+import HomeContext from "../pages/Home/homecontext"
+import BudgetContext from "../pages/Budgets/budgetcontext"
+
+interface BudgetModalProps {
+    page: "home" | "budget"
+}
 
 interface BudgetUpdates {
     daily?: number|null
@@ -7,7 +13,7 @@ interface BudgetUpdates {
     monthly?: number|null
 }
 
-export const BudgetsModalForm = () => {
+export const BudgetsModalForm = ({page}: BudgetModalProps) => {
     
     const cBudget = useExStore((state) => state.budgets)
     const updateBudget = useExStore((state) => state.updateBudget)
@@ -17,6 +23,9 @@ export const BudgetsModalForm = () => {
     const dailyRef = useRef<HTMLInputElement>(null)
     const weeklyRef = useRef<HTMLInputElement>(null)
     const monthlyRef = useRef<HTMLInputElement>(null)
+    
+    const {setHomeModalShow} = useContext(HomeContext)
+    const {setBModalShow} = useContext(BudgetContext)
 
     const handleEdit = () => {
         
@@ -47,6 +56,13 @@ export const BudgetsModalForm = () => {
             }
 
             setIsEditing(false)
+
+            if (page === "home") {
+                setHomeModalShow(false)
+            } else {
+                setBModalShow(false)
+            }
+
         } else {
             setIsEditing(true)
         }
@@ -59,15 +75,16 @@ export const BudgetsModalForm = () => {
             className="flex flex-col gap-[1em] max-w-120 bg-white"
         >
             {isEditing ?
-                <input className="p-1 border" ref={dailyRef} type="text" defaultValue={cBudget.daily ? cBudget.daily : '0'} /> :
+                <label htmlFor="">Daily: <input className="p-1 border" ref={dailyRef} type="text" defaultValue={cBudget.daily ? cBudget.daily : '0'} /></label> :
                 <span>Daily: {cBudget.daily ? cBudget.daily : 'No budget set'}</span>
             }
             {isEditing ?
-                <input className="p-1 border" ref={weeklyRef} type="text" defaultValue={cBudget.weekly ? cBudget.weekly : '0'} /> :
-                <span>Monthly: {cBudget.weekly ? cBudget.weekly : 'No budget set'}</span>
+                <label htmlFor="">Weekly: <input className="p-1 border" ref={weeklyRef} type="text" defaultValue={cBudget.weekly ? cBudget.weekly : '0'} /></label> :
+                <span>Weekly: {cBudget.weekly ? cBudget.weekly : 'No budget set'}</span>
             }
             {isEditing ?
-                <input className="p-1 border" ref={monthlyRef} type="text" defaultValue={cBudget.monthly ? cBudget.monthly : '0'} /> :
+                <label htmlFor="">Monthly: <input className="p-1 border" ref={monthlyRef} type="text" defaultValue={cBudget.monthly ? cBudget.monthly : '0'} /></label>
+                :
                 <span>Monthly: {cBudget.monthly ? cBudget.monthly : 'No budget set'}</span>
             }
             <div className="flex">

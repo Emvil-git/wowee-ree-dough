@@ -12,8 +12,13 @@ export const BudgetsTop = () => {
                 <span>Daily {budgets.daily === null ? "Not Assigned" : budgets.daily}</span>
             </div>
     
+            <button
+                className="p-1 border bg-amber-300"
+            >
+                Set Budgets
+            </button>
+
             {/* TODO WEEKDAY/WEEKEND SPLIT */}
-            Categories:
         </div>
     )
 }
