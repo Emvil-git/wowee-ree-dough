@@ -129,7 +129,7 @@ const useExStore = create<ExStoreType>()(
             partialize: (state) => ({
                 transactions: state.transactions,
                 categories: state.categories,
-                budget: state.budgets
+                budgets: state.budgets
             })
         }
     )
