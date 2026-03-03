@@ -1,4 +1,4 @@
-import ProgBar from "../../../components/ProgBar"
+import ProgBar from "../../../components/progBar/ProgBar"
 import { useTime } from "../../../hooks/useTime"
 
 export const TopHome = () => {
@@ -8,7 +8,7 @@ export const TopHome = () => {
         <div className="border border-gray-500">
             <p>{isoLocal}</p>
             <p>weekx of month</p>
-            <ProgBar/>
+            <ProgBar timePeriod="daily"/>
             {/* TODO: Overview button, check spendings so far */}
         </div>
     )

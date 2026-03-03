@@ -1,7 +1,13 @@
 import { useState } from "react"
-import useExStore from "../store/expenses"
+import useExStore from "../../store/expenses"
+import { BudgetBtn } from "../BudgetsBtn"
+import { Bar } from "./Bar"
 
-export const ProgBar = () => {
+interface ProgBarPropType {
+    timePeriod: "daily" | "weekly" | "monthly"
+}
+
+export const ProgBar = ({timePeriod}: ProgBarPropType) => {
     const [max, setMax] = useState(100)
     const [fill, setFill] = useState(40)
 
@@ -15,8 +21,9 @@ export const ProgBar = () => {
     ) : 0
 
     return (
-        <div className="w-full max-w-[32em]">
+        <div className="w-full max-w-[28em]">
             {/* {total}/{max} */}
+            { budgets.daily ? <Bar max={budgets.daily} fill={total}/> : <BudgetBtn/> }
         </div>
     )
 }
