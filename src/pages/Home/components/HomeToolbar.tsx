@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import useAppStateStore from "../../../store/appStates"
 
 export const HomeToolbar = () => {

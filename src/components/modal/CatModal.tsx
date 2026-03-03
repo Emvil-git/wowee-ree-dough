@@ -1,4 +1,4 @@
-import React, { useRef, useContext, type FormEvent, useState, useEffect } from "react"
+import { useRef, type FormEvent, useState, useEffect } from "react"
 import useExStore from "../../store/expenses"
 // import HomeContext from "../homecontext"
 import { type CategoryType } from "../../types/categoryType"
