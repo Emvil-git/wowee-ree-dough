@@ -1,10 +1,11 @@
 import React, { useRef, useContext, type FormEvent } from "react"
-import useExStore from "../../../store/expenses"
-import { getFullDateTime } from "../../../utility_fx"
-import HomeContext from "../homecontext"
-import { type TransactionType } from "../../../types/transactionType"
+import useExStore from "../../store/expenses"
+import { getFullDateTime } from "../../utility_fx"
+// import HomeContext from "../homecontext"\
+import { type TransactionType } from "../../types/transactionType"
+import useAppStateStore from "../../store/appStates"
 
-export const AddTxModal = () => {
+export const TxModal = () => {
     const formRef = useRef<HTMLFormElement>(null)
     const nameRef = useRef<HTMLInputElement>(null)
     const valueRef = useRef<HTMLInputElement>(null)
@@ -13,7 +14,7 @@ export const AddTxModal = () => {
     const categories = useExStore((state) => state.categories)
     const addTx = useExStore((state) => state.addTransaction)
 
-    const {setHomeModalShow} = useContext(HomeContext)
+    const setModalShow = useAppStateStore((state) => state.setModalShow)
 
     const handleSubmit = (e: FormEvent) => {
             e.preventDefault();
@@ -36,7 +37,7 @@ export const AddTxModal = () => {
             }
     
             console.log("closing add modal")
-            setHomeModalShow(false)
+            setModalShow(false)
         }
 
     return (

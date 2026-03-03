@@ -1,31 +1,34 @@
 import React, { useContext } from "react"
-import HomeContext from "../homecontext"
+import useAppStateStore from "../../../store/appStates"
 
 export const HomeToolbar = () => {
 
-    const { homeModalShow ,setHomeModalShow, setModalMode } = useContext(HomeContext)
+    
+    const setModalMode = useAppStateStore((state) => state.setModalMode)
+    const setModalShow = useAppStateStore((state) => state.setModalShow)
+    const modalShow = useAppStateStore((state) => state.modalShow)
 
     const handleAddTxClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
         setModalMode("transaction")
-        if (!homeModalShow) {
-            setHomeModalShow(true)
+        if (!modalShow) {
+            setModalShow(true)
         }
     }
 
     const handleAddCatClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
         setModalMode("category")
-        if (!homeModalShow) {
-            setHomeModalShow(true)
+        if (!modalShow) {
+            setModalShow(true)
         }
     }
 
     const handleSetBudgetClick = (ev:React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
         setModalMode("budget")
-        if (!homeModalShow) {
-            setHomeModalShow(true)
+        if (!modalShow) {
+            setModalShow(true)
         }
     } 
 

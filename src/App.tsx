@@ -4,9 +4,11 @@ import AppRoutes from './routes'
 import './App.css'
 import useExStore from './store/expenses'
 import useAppStateStore from './store/appStates'
+import { AppModal } from './components/modal/AppModal'
 
 function App() {
   const setIsHydrated = useAppStateStore((state) => state.setIsHydrated)
+  const modalShow = useAppStateStore((state) => state.modalShow)
 
   useEffect(() => {
     useExStore.persist.rehydrate()
@@ -21,6 +23,7 @@ function App() {
       <main className='flex flex-col items-center'>
         <AppRoutes/>
       </main>
+      {modalShow && <AppModal/>}
     </>
   )
 }

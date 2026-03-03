@@ -1,17 +1,19 @@
 import React, { useContext } from "react"
 import useExStore from "../../../store/expenses"
 import BudgetContext from "../budgetcontext"
+import useAppStateStore from "../../../store/appStates"
 
 export const BudgetsTop = () => {
     
     const budgets = useExStore((state) => state.budgets)
-    const {bModalMode, setBModalMode, setBModalShow} = useContext(BudgetContext)
+    const setModalMode = useAppStateStore((state) => state.setModalMode)
+    const setModalShow = useAppStateStore((state) => state.setModalShow)
     
     const handleOpenModal = (ev:React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
 
-        setBModalMode("setBudget")
-        setBModalShow(true)
+        setModalMode("budget")
+        setModalShow(true)
     }
 
     return(

@@ -2,7 +2,6 @@ import { BudgetsTop } from "./components/BudgetsTop"
 import { BudgetCategory } from "./components/BudgetCategory"
 import BudgetContext from "./budgetcontext"
 import { useState } from "react"
-import { BudgetModal } from "./components/BudgetModal"
 
 const Budgets = () => {
     const [bModalShow, setBModalShow] = useState(false)
@@ -14,8 +13,6 @@ const Budgets = () => {
                 <BudgetsTop/>
                 <BudgetCategory/>
             </div>
-
-            {bModalShow ? <BudgetModal/> : ''}
         </BudgetContext>
     )
 }

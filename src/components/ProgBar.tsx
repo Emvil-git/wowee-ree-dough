@@ -6,17 +6,17 @@ export const ProgBar = () => {
     const [fill, setFill] = useState(40)
 
     const transactions = useExStore((state => state.transactions))
+    const budgets = useExStore((state => state.budgets))
 
     const total = transactions.length ? transactions.map(
         (tx) => tx.value
     ).reduce(
         (acc, val) => acc + val
     ) : 0
-    
 
     return (
         <div className="w-full max-w-[32em]">
-            {total}/{max}
+            {/* {total}/{max} */}
         </div>
     )
 }

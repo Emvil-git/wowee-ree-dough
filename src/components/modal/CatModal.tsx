@@ -1,10 +1,11 @@
 import React, { useRef, useContext, type FormEvent, useState, useEffect } from "react"
-import useExStore from "../../../store/expenses"
-import HomeContext from "../homecontext"
-import { type CategoryType } from "../../../types/categoryType"
-import { colourObjs } from "../../../utility"
+import useExStore from "../../store/expenses"
+// import HomeContext from "../homecontext"
+import { type CategoryType } from "../../types/categoryType"
+import { colourObjs } from "../../utility"
+import useAppStateStore from "../../store/appStates"
 
-export const AddCatModal = () => {
+export const CatModal = () => {
 
     const formRef = useRef<HTMLFormElement>(null)
     const nameRef = useRef<HTMLInputElement>(null)
@@ -16,7 +17,7 @@ export const AddCatModal = () => {
     const [isCOpen, setIsCOpen] = useState(false)
     const [cSelected, setCSelected] = useState(colourObjs[0])
 
-    const {setHomeModalShow} = useContext(HomeContext)
+    const setModalShow = useAppStateStore((state) => state.setModalShow)
 
     // useEffect(() => {
     //     const handleClickOutside = (ev: MouseEvent) => {
@@ -43,7 +44,7 @@ export const AddCatModal = () => {
             }
     
             console.log("closing add modal")
-            setHomeModalShow(false)
+            setModalShow(false)
         }
 
     return (
