@@ -8,7 +8,7 @@ interface HomeContextVals {
 
 export const HomeContext = createContext<HomeContextVals>(
     {
-        filterMode: "daily",
+        filterMode: "all",
         setFilterMode: () => {}
     }
 )

@@ -53,15 +53,25 @@ export const filterToLuxon = (filt: FilterType) :DateTimeUnit => {
       return "month"
     case "weekly":
       return "week"
+    case "yearly":
+      return "year"
+    default:
+      return "day"
   }
 }
 
-export const txFilter = (tsx: TransactionType[], refDate: DateTime, filtMode?: FilterType ) => { // maybe I change my mind and use this universally
-  const lxMode = filtMode ? filterToLuxon(filtMode) : "day" // i dont know not in a proper mental state, coding to cope
+export const txFilter = (tsx: TransactionType[], refDate: DateTime, filtMode: FilterType ) => { // maybe I change my mind and use this universally
+  const lxMode = filterToLuxon(filtMode)
 
-  return tsx.filter((tx) => {
-    const txDate = DateTime.fromISO(tx.date)
+  if (filtMode !== "all") {
+    return tsx.filter((tx) => {
+      const txDate = DateTime.fromISO(tx.date)
 
-    return txDate.hasSame(refDate, lxMode)
-  })  
+      return txDate.hasSame(refDate, lxMode)
+    })  
+  } else {
+    return tsx
+  }
+
+  
 }

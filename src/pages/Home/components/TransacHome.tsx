@@ -1,16 +1,24 @@
-import { useMemo } from "react"
+import { useContext, useMemo } from "react"
 import TransacItem from "../../../components/TransacItem"
 import useExStore from "../../../store/expenses"
 import { useCategorisedTx } from "../../../hooks/useCategorisedTx"
+import HomeContext from "../homecontext"
+import { txFilter } from "../../../utility_fx"
+import { DateTime } from "luxon"
 
 export const TransacHome = () => {
 
     const transactions = useExStore((state) => state.transactions)
     const clearTx = useExStore((state) => state.clearTransactions)
     const categories = useExStore((state) => state.categories)
+    const {filterMode} = useContext(HomeContext)
+
+    const filteredTx = useMemo(() => {
+        return txFilter(transactions, DateTime.now(), filterMode)
+    }, [transactions])
 
     const sortedTx = useMemo(() => {
-        return[...transactions].sort((a, b) => b.date.localeCompare(a.date))
+        return[...filteredTx].sort((a, b) => b.date.localeCompare(a.date))
     }, [transactions])
 
     const categorisedTx = useCategorisedTx(sortedTx, categories)

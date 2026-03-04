@@ -6,7 +6,7 @@ import HomeContext from "./homecontext"
 import type { FilterType } from "../../types/utilTypes"
 
 const Home = () => {
-    const [filterMode, setFilterMode] = useState<FilterType>("daily")
+    const [filterMode, setFilterMode] = useState<FilterType>("all")
 
     return(
         <HomeContext value={{filterMode, setFilterMode}}>

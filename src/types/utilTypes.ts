@@ -1,1 +1,1 @@
-export type FilterType = "daily" | "weekly" | "monthly"
+export type FilterType = "daily" | "weekly" | "monthly" | "yearly" | "all"
