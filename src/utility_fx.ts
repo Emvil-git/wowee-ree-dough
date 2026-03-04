@@ -1,4 +1,6 @@
-import { DateTime } from "luxon"
+import { DateTime, type DateTimeUnit } from "luxon"
+import { type TransactionType } from "./types/transactionType"
+import type { FilterType } from "./types/utilTypes"
 
 export const getDateNOW = (): string => {
     return new Date().toISOString().split('T')[0]
@@ -41,4 +43,25 @@ export const getCurrYear = () => {
   const currDate = new Date()
 
   return currDate.toLocaleString('en-gb', {year: "numeric"})
+}
+
+export const filterToLuxon = (filt: FilterType) :DateTimeUnit => {
+  switch (filt) {
+    case "daily":
+      return "day"
+    case "monthly":
+      return "month"
+    case "weekly":
+      return "week"
+  }
+}
+
+export const txFilter = (tsx: TransactionType[], refDate: DateTime, filtMode?: FilterType ) => { // maybe I change my mind and use this universally
+  const lxMode = filtMode ? filterToLuxon(filtMode) : "day" // i dont know not in a proper mental state, coding to cope
+
+  return tsx.filter((tx) => {
+    const txDate = DateTime.fromISO(tx.date)
+
+    return txDate.hasSame(refDate, lxMode)
+  })  
 }

@@ -2,12 +2,12 @@ import { BudgetsTop } from "./components/BudgetsTop"
 import { BudgetCategory } from "./components/BudgetCategory"
 import BudgetContext from "./budgetcontext"
 import { useState } from "react"
+import type { FilterType } from "../../types/utilTypes"
 
 const Budgets = () => {
-    const [bModalShow, setBModalShow] = useState(false)
-    const [bModalMode, setBModalMode] = useState<"setBudget">("setBudget")
+    const [filterMode, setFilterMode] = useState<FilterType>("daily")
     return(
-        <BudgetContext value={{bModalShow,setBModalShow, bModalMode, setBModalMode}}>
+        <BudgetContext value={{filterMode, setFilterMode}}>
             <div>
                 This is the budgets page
                 <BudgetsTop/>
