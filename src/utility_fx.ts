@@ -75,3 +75,9 @@ export const txFilter = (tsx: TransactionType[], refDate: DateTime, filtMode: Fi
 
   
 }
+
+export const isoToDate = (isoString: string) => {
+  const dateObj = new Date(isoString)
+
+  return dateObj.toLocaleString('en-gb', {day: "numeric",month: "long", year: "numeric"})
+}

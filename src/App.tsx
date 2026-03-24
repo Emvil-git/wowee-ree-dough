@@ -19,11 +19,11 @@ function App() {
 
   return (
     <>
-      <Navigation/>
       <main className='flex flex-col items-center'>
         <AppRoutes/>
       </main>
       {modalShow && <AppModal/>}
+      <Navigation/>
     </>
   )
 }
