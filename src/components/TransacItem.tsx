@@ -51,15 +51,20 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
             <form
             className="flex flex-col gap-1"
             >
-                {isEditing ?
-                    <input className="p-1 border" ref={nameRef} type="text" defaultValue={name} /> :
-                    <span>{name}</span>
-                }
-                {isEditing ?
-                    <input className="p-1 border"  ref={valueRef} type="number" defaultValue={value} /> :
-                    <span>{value}</span>
-                }
-                <DateDisplay date={isoZToLocal(date)}/>
+                <div className="flex justify-between">
+                    <div>
+                        {isEditing ?
+                            <input className="p-1 border" ref={nameRef} type="text" defaultValue={name} /> :
+                            <span>{name}</span>
+                        }
+                    </div>
+
+                    <DateDisplay date={isoZToLocal(date)}/>
+                </div>
+                
+                
+                
+                
 
                 {/* <span>{category ? category.name : 'BOMBACLAAT'}</span> */}
 
@@ -74,6 +79,10 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                         </select>
                     </div> :
                     <>{category ? <CatDisplay {...category}/> : 'BOMBACLAAT'}</>
+                }
+                {isEditing ?
+                    <input className="p-1 text-4xl border"  ref={valueRef} type="number" defaultValue={value} /> :
+                    <span className="text-4xl leading-4">{value}</span>
                 }
             </form>
 

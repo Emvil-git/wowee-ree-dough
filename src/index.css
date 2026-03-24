@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+:root {
+  --line-height-base: 0.75; /* change this one value to tune everything */
+}
+ 
+h1, h2, h3, h4, h5, h6,
+p,
+blockquote,
+pre,
+address,
+li,
+dt, dd,
+figcaption,
+caption,
+label,
+legend,
+summary {
+  line-height: var(--line-height-base);
+}

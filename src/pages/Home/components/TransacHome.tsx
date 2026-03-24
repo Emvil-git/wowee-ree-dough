@@ -24,7 +24,7 @@ export const TransacHome = () => {
     const categorisedTx = useCategorisedTx(sortedTx, categories)
 
     return(
-        <div>
+        <div className="mt-4 w-full flex flex-col gap-2">
             {/* {sortedTx.map((tx) => (
                 <TransacItem key={tx.id} {...tx} canUD={true}/>
             ))} */}

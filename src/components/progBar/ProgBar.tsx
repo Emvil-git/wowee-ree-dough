@@ -21,7 +21,7 @@ export const ProgBar = ({timePeriod}: ProgBarPropType) => {
     ) : 0
 
     return (
-        <div className="w-full  p-2">
+        <div className="w-full">
             {/* {total}/{max} */}
             { budgets.daily ? <Bar max={budgets.daily} fill={total}/> : <BudgetBtn/> }
         </div>
