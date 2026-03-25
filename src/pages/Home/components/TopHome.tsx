@@ -103,7 +103,7 @@ export const TopHome = () => {
                 <p className="text-6xl"><span className="text-4xl mr-1">PHP</span>{total.toFixed(2)}</p>
                 <p className="text-lg">{totalLabeller()}</p>
             </div>
-            <ProgBar timePeriod="daily"/>
+            <ProgBar timePeriod={filterMode}/>
             {/* TODO: Overview button, check spendings so far */}
         </div>
     )
