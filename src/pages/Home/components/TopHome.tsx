@@ -26,8 +26,10 @@ export const TopHome = () => {
     const setModalMode = useAppStateStore((state) => state.setModalMode)
     const setModalShow = useAppStateStore((state) => state.setModalShow)
     const modalShow = useAppStateStore((state) => state.modalShow) //YUHH
+    const filterMode = useAppStateStore((state) => state.filterMode)
+    const setFilterMode = useAppStateStore((state) => state.setFilterMode)
 
-    const {filterMode, setFilterMode} = useContext(HomeContext)
+    // const {filterMode, setFilterMode} = useContext(HomeContext)
 
     const filteredTx = useMemo(() => {
             return txFilter(transactions, DateTime.now(), filterMode)

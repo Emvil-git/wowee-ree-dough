@@ -6,6 +6,8 @@ interface HomeContextVals {
     setFilterMode: (newFilter: FilterType) => void
 }
 
+// i have to rethnk my life choices
+
 export const HomeContext = createContext<HomeContextVals>(
     {
         filterMode: "all",

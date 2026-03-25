@@ -1,6 +1,7 @@
 import { useContext, useMemo } from "react"
 import TransacItem from "../../../components/TransacItem"
 import useExStore from "../../../store/expenses"
+import useAppStateStore from "../../../store/appStates"
 import { useCategorisedTx } from "../../../hooks/useCategorisedTx"
 import HomeContext from "../homecontext"
 import { txFilter } from "../../../utility_fx"
@@ -11,7 +12,10 @@ export const TransacHome = () => {
     const transactions = useExStore((state) => state.transactions)
     const clearTx = useExStore((state) => state.clearTransactions)
     const categories = useExStore((state) => state.categories)
-    const {filterMode} = useContext(HomeContext)
+
+    const filterMode = useAppStateStore((state) => state.filterMode)
+
+    // const {filterMode} = useContext(HomeContext)
 
     const filteredTx = useMemo(() => {
         return txFilter(transactions, DateTime.now(), filterMode)
