@@ -33,7 +33,7 @@ export const HomeToolbar = () => {
     } 
 
     return(
-        <div className="absolute bottom-0 w-screen bg-gray-200 flex gap-2">
+        <div className="absolute bottom-[4em] w-screen bg-gray-200 flex gap-2">
             <button onClick={handleAddTxClick}>ADD TX</button>
             <button onClick={handleAddCatClick}>ADD CAT</button>
             <button onClick={handleSetBudgetClick}>SET BUDGETS</button>

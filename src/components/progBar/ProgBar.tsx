@@ -8,8 +8,6 @@ interface ProgBarPropType {
 }
 
 export const ProgBar = ({timePeriod}: ProgBarPropType) => {
-    const [max, setMax] = useState(100)
-    const [fill, setFill] = useState(40)
 
     const transactions = useExStore((state => state.transactions))
     const budgets = useExStore((state => state.budgets))
