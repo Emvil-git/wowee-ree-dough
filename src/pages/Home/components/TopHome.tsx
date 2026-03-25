@@ -50,11 +50,13 @@ export const TopHome = () => {
                 return "This week's spending"
             case "monthly":
                 return "This month's spending"
+            case "yearly":
+                return "This year's spending"
         }
     }
 
     return (
-        <div className="w-full border border-gray-500 p-4">
+        <div className="w-full border border-gray-500 p-4 shrink-0">
             {/* TODO: FILTER TYPE SETTER */}
             {/* TODO: TOTAL SPENDING FOR FILTER TYPE */}
             <div className="w-full flex justify-between items-center">

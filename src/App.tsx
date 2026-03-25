@@ -18,13 +18,13 @@ function App() {
   
 
   return (
-    <>
-      <main className='flex flex-col items-center'>
+    <main className='h-screen flex flex-col items-center overflow-hidden'>
+      <section className='flex-1 min-h-0'>
         <AppRoutes/>
-      </main>
+      </section>
       {modalShow && <AppModal/>}
       <Navigation/>
-    </>
+    </main>
   )
 }
 
