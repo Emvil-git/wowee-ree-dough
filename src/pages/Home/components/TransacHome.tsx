@@ -15,11 +15,11 @@ export const TransacHome = () => {
 
     const filteredTx = useMemo(() => {
         return txFilter(transactions, DateTime.now(), filterMode)
-    }, [transactions])
+    }, [transactions,filterMode])
 
     const sortedTx = useMemo(() => {
         return[...filteredTx].sort((a, b) => b.date.localeCompare(a.date))
-    }, [transactions])
+    }, [filteredTx])
 
     const categorisedTx = useCategorisedTx(sortedTx, categories)
 

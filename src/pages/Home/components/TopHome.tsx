@@ -2,21 +2,31 @@ import ProgBar from "../../../components/progBar/ProgBar"
 import { useTime } from "../../../hooks/useTime"
 import { isoToDate } from "../../../utility_fx"
 import useExStore from "../../../store/expenses"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import HomeContext from "../homecontext"
 import { useMemo } from "react"
 import { txFilter } from "../../../utility_fx"
 import { DateTime } from "luxon"
+import type { FilterType } from "../../../types/utilTypes"
 
 export const TopHome = () => {
+
+    const filterOptions: Record<FilterType, string> = {
+        daily:"Daily",
+        weekly:"Weekly",
+        monthly:"Monthly",
+        yearly:"Yearly",
+        all:"All Time"
+    }
+
     const {isoLocal} = useTime()
 
     const transactions = useExStore((state => state.transactions))
-    const {filterMode} = useContext(HomeContext)
+    const {filterMode, setFilterMode} = useContext(HomeContext)
 
     const filteredTx = useMemo(() => {
             return txFilter(transactions, DateTime.now(), filterMode)
-        }, [transactions])
+        }, [transactions, filterMode])
 
     const total = useMemo(() => {
         return filteredTx.length ? filteredTx.map(
@@ -25,6 +35,10 @@ export const TopHome = () => {
             (acc, val) => acc + val
         ) : 0
     }, [filteredTx])
+
+    const handleFilterSelect = (ev:React.ChangeEvent<HTMLSelectElement>) => {
+        setFilterMode(ev.target.value as FilterType)
+    }
 
     const totalLabeller = () => {
         switch (filterMode){
@@ -43,9 +57,29 @@ export const TopHome = () => {
         <div className="w-full border border-gray-500 p-4">
             {/* TODO: FILTER TYPE SETTER */}
             {/* TODO: TOTAL SPENDING FOR FILTER TYPE */}
+            <div className="w-full flex justify-between items-center">
+                <p className="text-xl">{isoToDate(isoLocal)}</p>
+
+                <div>
+                    
+
+                    <div>
+                        <select name="" id="" value={filterMode} onChange={handleFilterSelect}>
+                            {(Object.keys(filterOptions) as FilterType[]).map(filt => (
+                                <option key={filt} value={filt}>{filterOptions[filt]}</option>
+                            ))}
+                        </select>
+
+                        <button
+                            className="border-2 py-0 px-2"
+                        >
+                            Set Budgets
+                        </button>
+                    </div>
+                </div>
+            </div>
             
-            <p>{isoToDate(isoLocal)}</p>
-            <p>weekx of month</p>
+            {/* <p>weekx of month</p> */}
             <div className="my-2">
                 <p className="text-6xl"><span className="text-4xl mr-1">PHP</span>{total.toFixed(2)}</p>
                 <p className="text-lg">{totalLabeller()}</p>
