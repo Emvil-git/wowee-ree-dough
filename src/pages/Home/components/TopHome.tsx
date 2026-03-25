@@ -8,6 +8,7 @@ import { useMemo } from "react"
 import { txFilter } from "../../../utility_fx"
 import { DateTime } from "luxon"
 import type { FilterType } from "../../../types/utilTypes"
+import useAppStateStore from "../../../store/appStates"
 
 export const TopHome = () => {
 
@@ -22,6 +23,10 @@ export const TopHome = () => {
     const {isoLocal} = useTime()
 
     const transactions = useExStore((state => state.transactions))
+    const setModalMode = useAppStateStore((state) => state.setModalMode)
+    const setModalShow = useAppStateStore((state) => state.setModalShow)
+    const modalShow = useAppStateStore((state) => state.modalShow) //YUHH
+
     const {filterMode, setFilterMode} = useContext(HomeContext)
 
     const filteredTx = useMemo(() => {
@@ -38,6 +43,15 @@ export const TopHome = () => {
 
     const handleFilterSelect = (ev:React.ChangeEvent<HTMLSelectElement>) => {
         setFilterMode(ev.target.value as FilterType)
+    }
+
+    const handleTheseNuts = (ev:React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault()
+
+        setModalMode("budget")
+        if (!modalShow) {
+            setModalShow(true)
+        }
     }
 
     const totalLabeller = () => {
@@ -74,6 +88,7 @@ export const TopHome = () => {
 
                         <button
                             className="border-2 py-0 px-2"
+                            onClick={handleTheseNuts}
                         >
                             Set Budgets
                         </button>
