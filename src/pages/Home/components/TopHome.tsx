@@ -96,12 +96,13 @@ export const TopHome = () => {
 
             
 
-            <div className="absolute top-[-1.125em] left-[1em] px-4 bg-rose-600 text-white rounded-md border-3 border-stone-950">
-                <span className="text-xl">{handleDateThing()}</span>
+            <div className="absolute top-[-1.125em] left-[1em] ">
+                <span className="text-2xl px-4 bg-rose-600 text-white rounded-md border-3 border-stone-950">{handleDateThing()}</span>
+
+                <div className="absolute h-full w-full bg-fuchsia-700 rounded-md border-3 border-gray-950 top-0 left-0 translate-1.5 -z-1"></div>
             </div>
 
-            <div className="w-full flex justify-end items-center skew-x-8">
-                
+            <div className="w-full flex justify-end items-center skew-x-8">  
                 <div>
                     <div>
                         <select
@@ -124,7 +125,7 @@ export const TopHome = () => {
             
             {/* <p>weekx of month</p> */}
             <div className="mb-4 skew-x-8">
-                <p className="text-8xl"><span className="text-4xl mr-1">PHP</span>{total.toFixed(2)}</p>
+                <p className="text-8xl"><span className="text-4xl mr-2">PHP</span>{total.toFixed(2)}</p>
                 <p className="text-lg text-stone-500">{totalLabeller()}</p>
             </div>
             <ProgBar timePeriod={filterMode}/>

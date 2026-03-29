@@ -42,33 +42,28 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
     }
 
     return(
-        <div className="p-4 pt-2 border-3 border-stone-950 flex flex-col gap-1" key={id}>
+        <div className="relative p-4 pt-6 border-3 border-stone-950 flex flex-col gap-1 rounded-md mt-1 text-gray-50 -skew-x-4 bg-stone-800" key={id}>
             {/* {name}
             {value}
             {date}
             {categoryUname} */}
 
+            <div className="absolute bg-rose-600 -top-[0.5em] px-2 rounded-sm -skew-x-4 left-3 text-lg text-gray-50 border-3 border-stone-950">
+                <DateDisplay date={isoZToLocal(date)}/>
+            </div>
+
             <form
-            className="flex flex-col gap-1"
+            className="flex flex-col gap-1 skew-x-4"
             >
                 <div className="flex justify-between">
-                    <div>
+                    <div className="text-2xl">
                         {isEditing ?
                             <input className="p-1 border" ref={nameRef} type="text" defaultValue={name} /> :
                             <span>{name}</span>
                         }
                     </div>
 
-                    <DateDisplay date={isoZToLocal(date)}/>
-                </div>
-                
-                
-                
-                
-
-                {/* <span>{category ? category.name : 'BOMBACLAAT'}</span> */}
-
-                { isEditing ? 
+                    { isEditing ? 
                     <div>
                         <label htmlFor="category">Category:</label>
                         <select id="category" ref={categoryRef} required>
@@ -80,10 +75,18 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                     </div> :
                     <>{category ? <CatDisplay {...category}/> : 'BOMBACLAAT'}</>
                 }
-                {isEditing ?
+                </div>
+
+                {/* <span>{category ? category.name : 'BOMBACLAAT'}</span> */}
+
+                
+                <span>
+                    <span className="text-4xl mr-2">PHP</span>
+                    {isEditing ?
                     <input className="p-1 text-4xl border"  ref={valueRef} type="number" defaultValue={value} /> :
-                    <span className="text-4xl leading-4">{value}</span>
+                    <span className="text-6xl">{value.toFixed(2)}</span>
                 }
+                </span>
             
 
             {canUD ? 
