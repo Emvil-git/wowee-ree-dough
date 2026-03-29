@@ -42,7 +42,7 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
     }
 
     return(
-        <div className="p-2 border flex flex-col gap-1" key={id}>
+        <div className="p-4 pt-2 border-3 border-stone-950 flex flex-col gap-1" key={id}>
             {/* {name}
             {value}
             {date}
@@ -84,7 +84,7 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                     <input className="p-1 text-4xl border"  ref={valueRef} type="number" defaultValue={value} /> :
                     <span className="text-4xl leading-4">{value}</span>
                 }
-            </form>
+            
 
             {canUD ? 
                 <div
@@ -103,6 +103,7 @@ export const TransacItem = ({id, name, value, date, category, canUD} : TransacIt
                     </button>
                 </div> : ''
             }
+            </form>
         </div>
     )
 }

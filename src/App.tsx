@@ -18,7 +18,7 @@ function App() {
   
 
   return (
-    <main className='h-screen flex flex-col items-center overflow-hidden'>
+    <main className='bg-stone-900 h-screen flex flex-col items-center overflow-hidden'>
       <section className='flex-1 min-h-0'>
         <AppRoutes/>
       </section>

@@ -10,7 +10,7 @@ const Home = () => {
 
     return(
         <HomeContext value={{filterMode, setFilterMode}}>
-            <div className="relative w-screen max-w-120 flex flex-col items-center pt-4 h-full overflow-hidden">
+            <div className="relative w-screen max-w-120 flex flex-col items-center pt-4 px-6 h-full overflow-hidden">
                 <TopHome/>
                 <TransacHome/>
                 <HomeToolbar/>

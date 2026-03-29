@@ -1,6 +1,6 @@
 import ProgBar from "../../../components/progBar/ProgBar"
 import { useTime } from "../../../hooks/useTime"
-import { isoToDate } from "../../../utility_fx"
+import { getCurrMonth, getCurrYear, isoToDate } from "../../../utility_fx"
 import useExStore from "../../../store/expenses"
 import React, { useContext } from "react"
 import HomeContext from "../homecontext"
@@ -71,25 +71,49 @@ export const TopHome = () => {
         }
     }
 
+    const handleDateThing = () => {
+        switch (filterMode){
+            case "monthly":
+                return `${getCurrMonth()} ${getCurrYear()}`
+            case "yearly":
+                return getCurrYear()
+            default:
+                return isoToDate(isoLocal)
+        }
+    }
+
     return (
-        <div className="w-full border border-gray-500 p-4 shrink-0">
+        <div className="relative w-full z-0 pt-4">
+
+            {/* I AM SHADOW BOY SHADOW SHADOW */}
+            <div style={{"height": "calc(100% - 1em)"}} className="absolute border-3 border-stone-950 bg-fuchsia-700
+        w-full rounded-lg -z-1 -skew-x-8 translate-2">
+            </div>
+
+            <div className="relative w-full border-3 border-stone-950 p-4 px-6 shrink-0 -skew-x-8 rounded-lg text-neutral-50 bg-stone-800 z-1">
             {/* TODO: FILTER TYPE SETTER */}
             {/* TODO: TOTAL SPENDING FOR FILTER TYPE */}
-            <div className="w-full flex justify-between items-center">
-                <p className="text-xl">{isoToDate(isoLocal)}</p>
 
+            
+
+            <div className="absolute top-[-1.125em] left-[1em] px-4 bg-rose-600 text-white rounded-md border-3 border-stone-950">
+                <span className="text-xl">{handleDateThing()}</span>
+            </div>
+
+            <div className="w-full flex justify-end items-center skew-x-8">
+                
                 <div>
-                    
-
                     <div>
-                        <select name="" id="" value={filterMode} onChange={handleFilterSelect}>
+                        <select
+                        className="rounded-sm px-2 py-1 h-[2em]"
+                        name="" id="" value={filterMode} onChange={handleFilterSelect}>
                             {(Object.keys(filterOptions) as FilterType[]).map(filt => (
                                 <option key={filt} value={filt}>{filterOptions[filt]}</option>
                             ))}
                         </select>
 
                         <button
-                            className="border-2 py-0 px-2"
+                            className="border-2 py-0 px-2 h-[2em]"
                             onClick={handleTheseNuts}
                         >
                             Set Budgets
@@ -99,13 +123,15 @@ export const TopHome = () => {
             </div>
             
             {/* <p>weekx of month</p> */}
-            <div className="my-2">
-                <p className="text-6xl"><span className="text-4xl mr-1">PHP</span>{total.toFixed(2)}</p>
-                <p className="text-lg">{totalLabeller()}</p>
+            <div className="mb-4 skew-x-8">
+                <p className="text-8xl"><span className="text-4xl mr-1">PHP</span>{total.toFixed(2)}</p>
+                <p className="text-lg text-stone-500">{totalLabeller()}</p>
             </div>
             <ProgBar timePeriod={filterMode}/>
             {/* TODO: Overview button, check spendings so far */}
         </div>
+        </div>
+        
     )
 }
 
